@@ -84,7 +84,7 @@ Cree una cuenta de Azure Blob Storage en la misma región que la instancia de Az
 
 1. Vaya a [Azure Portal](https://portal.azure.com) e inicie sesión con las credenciales de su cuenta.
 1. En el menú izquierdo, seleccione **Todos los servicios** y busque *"Cuentas de almacenamiento"*. Seleccione **Cuentas de almacenamiento** para abrir la página de cuentas de almacenamiento.
-1. En la página Cuentas de almacenamiento, seleccione **+Agregar** para crear una nueva cuenta de almacenamiento.
+1. En la página Cuentas de almacenamiento, seleccione **+ Agregar** para crear una nueva cuenta de almacenamiento.
 1. En la pestaña **Aspectos básicos** de la página **Crear cuenta de almacenamiento**, seleccione la suscripción que quiere usar para la cuenta de almacenamiento. A continuación, seleccione el grupo de recursos que contiene la instancia de Azure SQL Managed Instance.
 1. Escriba un nombre único para la cuenta de almacenamiento. 
     
@@ -95,7 +95,7 @@ Cree una cuenta de Azure Blob Storage en la misma región que la instancia de Az
 1. Seleccione **BlobStorage** como el tipo de cuenta de almacenamiento. 
 1. Seleccione **Almacenamiento con redundancia local (LRS)** como opción de replicación de la cuenta de almacenamiento.
 1. Revise los datos especificados y seleccione **Revisar y crear** para crear la cuenta de almacenamiento.
-1. Una vez creada la cuenta de almacenamiento, vaya a la página de la cuenta de almacenamiento y seleccione la opción **Contenedores** en el menú izquierdo. Luego, seleccione **+Contenedor** para crear un contenedor. Escriba un nombre para el contenedor y seleccione el nivel de acceso público. 
+1. Una vez creada la cuenta de almacenamiento, vaya a la página de la cuenta de almacenamiento y seleccione la opción **Contenedores** en el menú izquierdo. Luego, seleccione **+ Contenedor** para crear un contenedor. Escriba un nombre para el contenedor y seleccione el nivel de acceso público. 
 1. Seleccione el botón **Crear** para crear el contenedor.
 
 Después de completar estos pasos, tendrá una cuenta de Azure Blob Storage en la misma región que la instancia de Azure SQL Managed Instance, y un contenedor donde puede almacenar las copias de seguridad de base de datos para la migración.
