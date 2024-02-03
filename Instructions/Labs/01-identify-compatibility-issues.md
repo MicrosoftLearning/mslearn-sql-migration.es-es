@@ -15,7 +15,7 @@ Este ejercicio dura aproximadamente **15** minutos.
 
 Para ejecutar este ejercicio, asegúrese de que cumple los siguientes requisitos previos antes de continuar:
 
-- Necesitará SQL Server 2019 o una versión posterior, junto con la base de datos ligera [**AdventureWorksLT**](https://learn.microsoft.com/en-us/sql/samples/adventureworks-install-configure?view=sql-server-ver16&tabs=ssms) compatible con su instancia específica de SQL Server.
+- Necesitará SQL Server 2019 o una versión posterior, junto con la base de datos ligera [**AdventureWorksLT**](https://learn.microsoft.com/sql/samples/adventureworks-install-configure#download-backup-files) compatible con su instancia específica de SQL Server.
 - Descargar e instalar [Azure Data Studio.](https://learn.microsoft.com/sql/azure-data-studio/download-azure-data-studio) Si ya está instalado, actualícelo para asegurarse de que usa la versión más reciente.
 - Un usuario de SQL con acceso de lectura a la base de datos de origen.
 
@@ -27,19 +27,19 @@ Para ejecutar este ejercicio, asegúrese de que cumple los siguientes requisitos
 
 1. Seleccione la carpeta **Bases de datos** y, a continuación, **Nueva consulta**.
 
-1. En la ventana Nueva consulta, copie y pegue T-SQL. Ejecute la consulta para restaurar la base de datos.
+1. En la ventana Nueva consulta, copie y pegue T-SQL. Asegúrese de que la ruta de acceso y el nombre de archivo de copia de seguridad de la base de datos coincidan con el archivo de copia de seguridad real. En caso contrario, se producirá un error en el comando. Ejecute la consulta para restaurar la base de datos.
 
     ```sql
     RESTORE DATABASE AdventureWorksLT
-    FROM DISK = 'C:\LabFiles\AdventureWorksLT2019.bak'
+    FROM DISK = 'C:\<FolderName>\AdventureWorksLT2019.bak'
     WITH RECOVERY,
           MOVE 'AdventureWorksLT2019_Data' 
-            TO 'C:\LabFiles\AdventureWorksLT2019.mdf',
+            TO 'C:\<FolderName>\AdventureWorksLT2019.mdf',
           MOVE 'AdventureWorksLT2019_Log'
-            TO 'C:\LabFiles\AdventureWorksLT2019.ldf';
+            TO 'C:\<FolderName>\AdventureWorksLT2019.ldf';
     ```
 
-    > **Nota**: Asegúrese de que el nombre y la ruta de acceso del archivo de copia de seguridad de la base de datos del ejemplo anterior coincidan con el archivo de copia de seguridad real. Si no lo hacen, es posible que se produzca un error en el comando.
+    > **Nota**: Asegúrese de tener el archivo de copia de seguridad [AdventureWorks](https://learn.microsoft.com/sql/samples/adventureworks-install-configure#download-backup-files) ligero en la máquina SQL Server antes de ejecutar el comando T-SQL.
 
 1. Debería ver un mensaje correcto una vez completada la restauración.
 
