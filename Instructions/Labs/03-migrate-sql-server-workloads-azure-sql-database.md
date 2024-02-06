@@ -36,19 +36,19 @@ Vamos a restaurar la base de datos *AdventureWorks2016* en la instancia de SQL S
 
 1. Seleccione la carpeta **Bases de datos** y, a continuación, **Nueva consulta**.
 
-1. En la ventana Nueva consulta, copie y pegue T-SQL. Ejecute la consulta para restaurar la base de datos.
+1. En la ventana Nueva consulta, copie y pegue T-SQL. Asegúrese de que la ruta de acceso y el nombre de archivo de copia de seguridad de la base de datos coincidan con el archivo de copia de seguridad real. En caso contrario, se producirá un error en el comando. Ejecute la consulta para restaurar la base de datos.
 
     ```sql
     RESTORE DATABASE AdventureWorksLT
-    FROM DISK = 'C:\LabFiles\AdventureWorksLT2019.bak'
+    FROM DISK = 'C:\<FolderName>\AdventureWorksLT2019.bak'
     WITH RECOVERY,
           MOVE 'AdventureWorksLT2019_Data' 
-            TO 'C:\LabFiles\AdventureWorksLT2019.mdf',
+            TO 'C:\<FolderName>\AdventureWorksLT2019.mdf',
           MOVE 'AdventureWorksLT2019_Log'
-            TO 'C:\LabFiles\AdventureWorksLT2019.ldf';
+            TO 'C:\<FolderName>\AdventureWorksLT2019.ldf';
     ```
 
-    > **Nota**: Asegúrese de que el nombre y la ruta de acceso del archivo de copia de seguridad de la base de datos del ejemplo anterior coincidan con el archivo de copia de seguridad real. Si no lo hacen, es posible que se produzca un error en el comando.
+    > **Nota**: Asegúrese de tener el archivo de copia de seguridad [AdventureWorks](https://learn.microsoft.com/sql/samples/adventureworks-install-configure#download-backup-files) ligero en la máquina SQL Server antes de ejecutar el comando T-SQL.
 
 1. Debería ver un mensaje correcto una vez completada la restauración.
 
