@@ -150,36 +150,6 @@ Para instalar la extensión de migración, siga estos pasos: Si la extensión ya
 
     > **Nota**: Si **Azure SQL Migration** no está visible en la barra lateral del panel del servidor, vuelva a abrir Azure Data Studio.
  
-## Generación del esquema de la base de datos con DMA
-
-Antes de comenzar la migración, es necesario asegurarse de que el esquema existe en la base de datos de destino. Usamos DMA para crear el esquema a partir del origen y aplicarlo al destino.
-
-1. Inicie Data Migration Assistant.
-
-1. Cree un nuevo proyecto de migración y establezca el tipo de origen en **SQL Server**, el tipo de servidor de destino en **Azure SQL Database** y el ámbito de la migración en **Solo esquema**. Seleccione **Crear**.
-
-    ![Captura de pantalla que muestra cómo iniciar un nuevo proyecto de migración en Data Migration Assistant.](../media/3-data-migration-schema.png) 
-
-1. En la pestaña **Seleccionar origen**, escriba el nombre de la instancia de SQL Server de origen y seleccione **Autenticación de Windows** para **Tipo de autenticación**. Desactive **Cifrar conexión**. 
-
-1. Seleccione **Conectar**.
-
-1. Seleccione la base de datos **AdventureWorksLT** y, después, seleccione **Siguiente**.
-
-1. En la pestaña **Seleccionar destino**, escriba el nombre del servidor de Azure SQL Server de destino, seleccione **Autenticación de SQL Server** para **Tipo de autenticación** y proporcione las credenciales de usuario de SQL. 
-
-1. Seleccione la base de datos **AdventureWorksLT** y, después, seleccione **Siguiente**.
-
-1. En la pestaña **Seleccionar objetos**, seleccione todos los objetos de esquema de la base de datos de origen. Seleccione **Generar script SQL**. 
-
-    ![Captura de pantalla que muestra la pestaña seleccionar objetos en Data Migration Assistant.](../media/3-data-migration-generate.png)
-
-1. Una vez generado el esquema, dedique algún tiempo a revisarlo. Por lo general, este paso implica realizar los ajustes necesarios en el script para los objetos que no se pueden crear en su estado actual en la ubicación de destino, que no es el caso en este escenario.
- 
-1. Puede ejecutar el script manualmente mediante Azure Data Studio, SQL Management Studio o seleccionando **Implementar esquema**. Continúe con uno de los métodos.
-
-    ![Captura de pantalla que muestra el script generado en Data Migration Assistant.](../media/3-data-migration-script.png)
-
 ## Realizar una migración sin conexión de una base de datos de SQL Server a Azure SQL Database.
 
 Ahora estamos listos para migrar los datos. Para realizar una migración sin conexión con Azure Data Studio, siga estos pasos:
@@ -188,21 +158,23 @@ Ahora estamos listos para migrar los datos. Para realizar una migración sin con
 
 1. En **Paso 1: Bases de datos para valoración**, seleccione la base de datos *AdventureWorks* y, a continuación, seleccione **Siguiente**.
 
-1. En **Paso 2: Resultados y recomendaciones de la evaluación**, espere a que se complete la evaluación y, a continuación, seleccione **Azure SQL Database** como destino de **Azure SQL**.
+1. En el **paso 2: Resumen de evaluación y recomendaciones de SKU**, espere a que se complete la evaluación y revise los resultados. Seleccione **Siguiente**.
 
-1. En la parte inferior de la página **Paso 2: Resultados y recomendaciones de la evaluación**, seleccione **Ver/Seleccionar** para ver los resultados de la evaluación. Seleccione la base de datos que se va a migrar.
+1. En el **paso 3: Plataforma de destino y resultados de la evaluación**, seleccione la base de datos para ver los resultados de la evaluación.
 
     > **Nota**: Dedique un momento a revisar los resultados de la evaluación que aparecen en el lado derecho.
 
-1. En **Paso 3: Destino de Azure SQL**, si la cuenta aún no está vinculada, asegúrese de agregar una cuenta seleccionando el vínculo **Vincular cuenta**. A continuación, seleccione una cuenta de Azure, un inquilino de AD, una suscripción, una ubicación, un grupo de recursos, un servidor de Azure SQL Database y credenciales de Azure SQL Database.
+1. En la parte superior del **paso 3: Página de la plataforma de destino y resultados de la evaluación**, seleccione **Azure SQL Database** como destino de **Azure SQL**.
+
+1. En el **paso 4: Destino de Azure SQL**, si la cuenta aún no está vinculada, asegúrese de agregar una cuenta seleccionando el vínculo **Vincular cuenta**. A continuación, seleccione una cuenta de Azure, un inquilino de AD, una suscripción, una ubicación, un grupo de recursos, un servidor de Azure SQL Database y credenciales de Azure SQL Database.
 
 1. Seleccione **Conectar** y, a continuación, seleccione la base de datos *AdventureWorks* como **Base de datos de destino**. Seleccione **Siguiente**.
 
-1. En **Paso 4: Azure Database Migration Service**, seleccione el vínculo **Crear nuevo** para crear un servicio Azure Database Migration Service mediante el asistente. Siga los pasos proporcionados por el asistente para configurar un nuevo entorno de ejecución de integración autohospedado. Si ha creado anteriormente uno, puede reutilizarlo.
+1. En el **paso 5: Azure Database Migration Service**, seleccione el vínculo **Crear** para crear una instancia de Azure Database Migration Service mediante el asistente. Siga los pasos proporcionados por el asistente para configurar un nuevo entorno de ejecución de integración autohospedado. Si ha creado anteriormente uno, puede reutilizarlo.
 
-1. En **Paso 5: Configuración del origen de datos**, escriba las credenciales para conectarse a la instancia de SQL Server desde el entorno de ejecución de integración autohospedado. 
+1. En el **paso 6: Configuración del origen de datos**, escriba las credenciales para conectarse a la instancia de SQL Server desde el entorno de ejecución de integración autohospedado. 
 
-1. Seleccione las tablas que se van a migrar desde el origen al destino. 
+1. Seleccione todas las tablas para migrar de origen a destino y, a continuación, active la opción **Migrar esquema que falta**.
 
 1. Seleccione **Ejecutar validación**.
 
@@ -210,7 +182,7 @@ Ahora estamos listos para migrar los datos. Para realizar una migración sin con
 
 1. Una vez que se haya completado el proceso de validación, seleccione **Siguiente**.
 
-1. En **Paso 6: Resumen**, seleccione **Iniciar migración**.
+1. En el **paso 7: Resumen**, seleccione **Iniciar migración**.
 
 1. Seleccione **Migraciones de base de datos en curso** en el panel de migración para ver el estado de la migración. 
 
