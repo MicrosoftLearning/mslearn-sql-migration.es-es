@@ -1,115 +1,100 @@
 ---
 lab:
-  title: Comparación de los costes locales de Azure para la migración
+  title: Comparación de los costos de migración de Azure
 ---
 
-# Comparación de los costes locales de Azure para la migración
+# Comparación de los costos de migración de Azure
 
-El costo total de propiedad (TCO) es una herramienta que puede usar durante un proyecto de modernización de la plataforma de datos para evaluar la diferencia de costos que puede implicar la migración.
+La Calculadora de precios de Azure es una herramienta útil que puede usar durante un proyecto de modernización de la plataforma de datos para calcular los costes de diferentes servicios de Azure y enfoques de migración.
 
-En su distribuidor global, se espera que la modernización de la plataforma de datos genere ahorros importantes, pero la junta directiva le pidió calcular estos ahorros con la mayor precisión posible.
+En su minorista global, se espera que el proyecto de modernización de la plataforma de datos obtenga ahorros significativos, pero la junta de administración le ha pedido que calcule los costes de diferentes opciones de migración de Azure de la forma más precisa posible.
 
-Aquí se calculará el costo total de propiedad (TCO) de la migración a Azure mediante la calculadora de TCO.
+Aquí, calculará los costes estimados de migración a Azure mediante la [Calculadora de precios de Azure](https://azure.microsoft.com/en-us/pricing/calculator/).
 
 Este ejercicio dura aproximadamente **30** minutos.
 
-## Calcular el coste total de propiedad
+## Cálculo de los costos estimados de Azure
 
-1. Abra una nueva pestaña del explorador y vaya a [Calculadora de TCO de Azure](https://azure.microsoft.com/pricing/tco/calculator/).
-1. En **Definir las cargas de trabajo**, elimine las cargas de trabajo existentes en la sección **Servidores**.
+1. Abra una nueva pestaña del explorador y vaya a [Calculadora de precios de Azure](https://azure.microsoft.com/en-us/pricing/calculator/).
+1. La Calculadora de precios de Azure le ayuda a calcular los costes de los servicios de Azure. Calcularemos el coste de migrar la carga de trabajo de la base de datos a Azure.
 
 ## Agregue la carga de trabajo de la base de datos
 
-1. En **Bases de datos**, seleccione **+ Agregar base de datos**.
-1. En el cuadro de texto **Nombre**, escriba **Contabilidad**.
-1. En la sección **Origen**, elija estos valores:
+1. En la sección **Productos**, busque y seleccione **Azure SQL Database** (puede usar la búsqueda o examinar la categoría **Bases de datos**).
+1. En el panel de configuración de **Azure SQL Database** que aparece más abajo de la página, escriba estos valores:
 
     | Propiedad | Valor |
     | --- | --- |
-    | Base de datos | **Microsoft SQL Server** |
-    | Licencia | **Empresa** |
-    | Entorno | **Servidores físicos** |
+    | Region | **Este de EE. UU.** (o su región preferida) |
+    | Tipo | **Base de datos única** |
+    | Modelo de compra | **vCore** |
+    | Nivel de servicio | **Uso general** |
+    | Nivel de proceso | **aprovisionado** |
+    | Tipo de hardware | **Serie estándar (Gen5)** |
+    | Instancia | **4 núcleos virtuales** |
+    | Recuperación ante desastres | **Réplica principal o geográfica** |
+    | Proceso | **Con redundancia local** |
+    | Storage | **32 GB** |
+    | Almacenamiento de copia de seguridad | **RA-GRS** |
+
+1. Revise la estimación del coste mensual que se muestra para SQL Database.
+
+## Adición de una máquina virtual para comparar
+
+1. De nuevo en la sección **Productos**, busque y seleccione **Virtual Machines**.
+1. En el panel configuración de **Virtual Machines**, escriba estos valores:
+
+    | Propiedad | Valor |
+    | --- | --- |
+    | Region | **Este de EE. UU.** (igual que la base de datos) |
     | Sistema operativo | **Windows** |
-    | Licencia del sistema operativo | **Centro de datos** |
-    | Servidores | **1** |
-    | Procesadores por servidor | **1** |
-    | Núcleos por procesador | **4** |
-    | RAM (GB) | **64** |
-    | Optimizar por | **CPU** |
-    | SQL Server 2008/2008R2 | **Alternar para seleccionar este valor** |
+    | Tipo | **SQL Server** |
+    | Nivel | **Estándar** |
+    | Instancia | **D4s v3** (4 vCPU, 16 GB RAM) |
+    | Máquinas virtuales | **1** |
+    | Licencia | **SQL Standard** |
 
-1. En la sección **Destino**, elija estos valores:
+1. Expanda **Managed Disks** y agregue:
+   - Nivel: **SSD Premium**, **128 GB**
 
-    | Propiedad | Valor |
-    | --- | --- |
-    | Servicio | **VM con SQL Server** |
-    | Tipo de disco | **SSD** |
-    | E/S | **5000** |
-    | Almacenamiento de SQL Server | **32 GB** |
-    | Copia de seguridad de SQL Server | **32 GB** |
+## Adición de almacenamiento para copias de seguridad
 
-    > [!NOTE]
-    > Se recomienda usar discos SSD para las cargas de trabajo de producción en Azure.
-
-## Agregue las cargas de trabajo de red y almacenamiento
-
-1. En **Almacenamiento**, seleccione **+ Agregar almacenamiento**.
-1. En el cuadro de texto **Nombre**, escriba **Discos locales de contabilidad** y, luego, escriba estos valores:
+1. En la sección **Productos**, busque y seleccione **Cuentas de almacenamiento**.
+1. En el panel de configuración **Cuentas de almacenamiento**, escriba estos valores:
 
     | Propiedad | Valor |
     | --- | --- |
-    | Tipo de almacenamiento | **Disco local/SAN** |
-    | Tipo de disco | **HDD** |
-    | Capacity | **3 TB** |
-    | Copia de seguridad | **1 TB** |
-    | Archivar | **0 TB** |
+    | Region | **Este de EE. UU.** |
+    | Tipo | **Almacenamiento de blobs en bloques** |
+    | Rendimiento | **Estándar** |
+    | Tipo de cuenta de almacenamiento | **Uso general V2**. |
+    | Estructura de archivos | **Espacio de nombres plano** |
+    | Nivel de acceso | **Acceso frecuente** |
+    | Redundancia | **LRS** |
+    | Capacity | **1 TB** |
 
-1. En **Redes**, en los controles **Ancho de banda de salida**, seleccione **1 GB**.
-1. En la parte inferior de la página, seleccione **Siguiente**.
+## Revisión y comparación de los costes
 
-## Ajustar supuestos
+1. Revise los costes mensuales estimados totales de todos los servicios que ha agregado:
+   - **SQL Database**: Costes del servicio de base de datos administrado
+   - **Máquinas virtuales**: Costes de infraestructura de SQL Server en VM
+   - **Cuentas de almacenamiento**: Costes de copia de seguridad y almacenamiento adicional
 
-1. En la sección **Ajustar supuestos**, en la lista **Moneda**, seleccione la moneda que prefiera.
-1. En **Cobertura de Software Assurance (proporciona Ventaja híbrida de Azure)**, habilite la alternancia para seleccionar **Cobertura de Software Assurance de Windows Server**.
-1. Habilite la alternancia para seleccionar **Cobertura de Software Assurance de SQL Server**.
+1. Considere las siguientes preguntas a medida que revise las estimaciones:
+   - ¿Cómo se comparan los costes entre SQL Database (PaaS) y SQL Server en VM (IaaS)?
+   - ¿Cuáles son las desventajas entre los servicios administrados y los servicios de infraestructura?
+   - ¿Cómo pueden aumentar estos costes con sus requisitos de carga de trabajo?
 
-    > [!NOTE]
-    > Puede usar los vínculos que se proporcionan en la sección **Software Assurance** si quiere obtener más información sobre el aseguramiento que está disponible. 
+1. Para guardar esta estimación, seleccione **Guardar** o **Exportar** para compartirla con las partes interesadas.
 
-1. En **Almacenamiento con redundancia geográfica (GRS)**, asegúrese de que la opción **GRS replica sus datos a una región secundaria que se encuentra a cientos de kilómetros de distancia de la región primaria** no esté habilitada.
-1. En **Costos de las máquinas virtuales**, asegúrese de que la opción **Habilitar esta opción para que la calculadora no recomiende máquinas virtuales de la serie Bs** esté habilitada.
+## Exploración de las opciones de optimización de costes
 
-    > [!NOTE]
-    > Las máquinas virtuales de la serie B no tienen la proporción de memoria a núcleo virtual de 8 que se recomienda para las cargas de trabajo de SQL Server.
+1. En cada configuración del servicio, explore diferentes opciones para ver cómo afectan a los costes:
+   - **SQL Database**: pruebe diferentes niveles de servicio (Básico, Estándar, Premium) y tamaños de proceso.
+   - **Máquinas virtuales**: compare diferentes tamaños de máquina virtual y opciones de almacenamiento.
+   - **Almacenamiento**: compare diferentes opciones de redundancia y niveles de acceso.
 
-1. En **Costos de electricidad**, en el cuadro de texto **Price per KW hour** (Precio por hora de kW), escriba un valor realista para su ubicación.
+1. Observe cómo el cambio de estas opciones afecta a la estimación mensual general.
 
-    > [!NOTE]
-    > Puede encontrar precios de electricidad aproximados en [Global electricity prices](https://www.statista.com/statistics/263492/electricity-prices-in-selected-countries/) (Precios de electricidad global). Estos precios están en USD ($). Puede convertirlos a un valor aproximado en la moneda que prefiera.
+Ha usado la Calculadora de precios de Azure para calcular los costes para migrar el servidor de contabilidad de Adatum Corporation y sus bases de datos asociadas a diferentes servicios de Azure. Esto le proporciona una base para comparar las opciones de infraestructura como servicio (IaaS) frente a las opciones de plataforma como servicio (PaaS) y planear el presupuesto de migración.
 
-1. En **Costos de almacenamiento**, deje todos los valores predeterminados o ajústelos si no parecen razonables.
-1. En **Costos de personal de TI**, deje todos los valores predeterminados o ajústelos si no parecen razonables.
-1. En **Other assumption** (Otro supuesto), expanda cada sección y examine los costos asociados.
-1. En la parte inferior de la página, seleccione **Siguiente**.
-
-## Investigación del informe de 5 años
-
-1. En la página **Ver el informe**, tenga en cuenta que el **Período de tiempo** predeterminado es de **5 años**.
-1. Desplácese hacia abajo en el informe e investigue el desglose estimado de los costos de los sistemas locales y Azure. Anote esta información:
-
-    - ¿Cuál es el componente más significativo de los costos del entorno local?
-    - Si decide migrar a Azure, ¿cuál será el mayor ahorro de costos?
-
-1. Expanda cada sección por turnos e investigue el desglose de los costos.
-
-## Investigación del informe de 3 años
-
-1. Desplácese hasta la parte superior de la página y en el cuadro de texto **Período de tiempo**, seleccione **3 años**.
-1. Desplácese hacia abajo en el informe e investigue el desglose estimado de los costos de los sistemas locales y Azure. Anote esta información:
-
-    - ¿Cuál es el componente más significativo de los costos del entorno local?
-    - Si decide migrar a Azure, ¿cuál será el mayor ahorro de costos?
-
-1. Expanda cada sección por turnos e investigue el desglose de los costos.
-
-Ha usado la calculadora de TCO de Azure para identificar las diferencias de costos entre las implementaciones locales y de Azure para el servidor de Contabilidad de Adatum Corporation y las bases de datos asociadas.
