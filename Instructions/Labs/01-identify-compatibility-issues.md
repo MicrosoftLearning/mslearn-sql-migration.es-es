@@ -77,7 +77,7 @@ Ejecutará la extensión de migración de Azure para Azure Data Studio y el de 
 
 1. En el panel Azure SQL Migration, seleccione **Migrar a Azure SQL** para abrir el Asistente para la migración.
 
-1. En **Paso 1: Bases de datos para valoración**, seleccione la base de datos *AdventureWorks* y, a continuación, seleccione **Siguiente**.
+1. En el **paso 1: Bases de datos para la evaluación**, seleccione **No** en *"¿Desea realizar un seguimiento del proceso de migración en Azure Portal?"* y, después, seleccione la base de datos *AdventureWorksLT*. Seleccione **Siguiente**.
 
 1. En el **paso 2: Resultados de la evaluación y recomendaciones de SKU**, espere a que se complete la evaluación y seleccione **Siguiente**.
 
